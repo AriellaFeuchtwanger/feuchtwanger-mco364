@@ -18,8 +18,10 @@ public class Canvas extends JPanel {
 
 	public Canvas() {
 		buffer = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
-		//tool = new PencilTool();
-		tool = new LineTool();
+		// tool = new PencilTool();
+		//tool = new LineTool();
+		//tool = new BoxTool();
+		tool = new OvalTool();
 		
 		this.addMouseListener(new MouseListener() {
 
@@ -42,7 +44,7 @@ public class Canvas extends JPanel {
 			}
 
 			public void mouseReleased(MouseEvent event) {
-				
+
 				tool.mouseReleased(buffer.getGraphics(), event.getX(),
 						event.getY());
 				repaint();
@@ -60,7 +62,7 @@ public class Canvas extends JPanel {
 			}
 
 			public void mouseMoved(MouseEvent event) {
-				
+
 			}
 
 		});
@@ -71,8 +73,7 @@ public class Canvas extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(buffer, 0, 0, null);
-		tool.drawPreview(g
-				);
+		tool.drawPreview(g);
 
 	}
 }

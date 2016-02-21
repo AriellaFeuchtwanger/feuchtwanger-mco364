@@ -3,8 +3,7 @@ package feuchtwanger.mco364.paint;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class BoxTool implements Tool {
-
+public class OvalTool implements Tool {
 	private int lastX;
 	private int lastY;
 	int x;
@@ -20,21 +19,21 @@ public class BoxTool implements Tool {
 	public void mouseReleased(Graphics g, int x, int y) {
 		int width;
 		int height;
-
-		if (x > lastX) {
+		
+		if(x > lastX){
 			width = x - lastX;
-		} else {
+		} else{
 			width = lastX - x;
 		}
-
-		if (y > lastY) {
+		
+		if(y > lastY){
 			height = y - lastY;
-		} else {
+		} else{
 			height = lastY - y;
 		}
-
+		
 		g.setColor(Color.PINK);
-		g.drawRect(lastX, lastY, width, height);
+		g.drawOval(lastX, lastY, width, height);
 	}
 
 	public void mouseDragged(Graphics g, int x, int y) {
@@ -45,19 +44,20 @@ public class BoxTool implements Tool {
 	public void drawPreview(Graphics g) {
 		int width;
 		int height;
-		if (x > lastX) {
+		
+		if(x > lastX){
 			width = x - lastX;
-		} else {
+		} else{
 			width = lastX - x;
 		}
-
-		if (y > lastY) {
+		
+		if(y > lastY){
 			height = y - lastY;
-		} else {
+		} else{
 			height = lastY - y;
 		}
-
+		
 		g.setColor(Color.PINK);
-		g.drawRect(lastX, lastY, width, height);
+		g.drawOval(lastX, lastY, width, height);
 	}
 }
