@@ -32,4 +32,9 @@ public class PencilTool implements Tool {
 		
 	}
 
+	public void mouseClicked(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -8,4 +8,5 @@ public interface Tool {
 	void mouseReleased(Graphics g, int x, int y);
 	void mouseDragged(Graphics g, int x, int y);
 	void drawPreview(Graphics g);
+	void mouseClicked(Graphics g, int x, int y);
 }

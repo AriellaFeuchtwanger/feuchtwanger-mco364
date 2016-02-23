@@ -19,21 +19,27 @@ public class OvalTool implements Tool {
 	public void mouseReleased(Graphics g, int x, int y) {
 		int width;
 		int height;
+		int originX;
+		int originY;
 		
-		if(x > lastX){
+		if (x > lastX) {
 			width = x - lastX;
-		} else{
+			originX = lastX;
+		} else {
 			width = lastX - x;
+			originX = x;
 		}
-		
-		if(y > lastY){
+
+		if (y > lastY) {
 			height = y - lastY;
-		} else{
+			originY = lastY;
+		} else {
 			height = lastY - y;
+			originY = y;
 		}
-		
+
 		g.setColor(Color.PINK);
-		g.drawOval(lastX, lastY, width, height);
+		g.drawOval(originX, originY, width, height);
 	}
 
 	public void mouseDragged(Graphics g, int x, int y) {
@@ -44,20 +50,31 @@ public class OvalTool implements Tool {
 	public void drawPreview(Graphics g) {
 		int width;
 		int height;
+		int originX;
+		int originY;
 		
-		if(x > lastX){
+		if (x > lastX) {
 			width = x - lastX;
-		} else{
+			originX = lastX;
+		} else {
 			width = lastX - x;
+			originX = x;
 		}
-		
-		if(y > lastY){
+
+		if (y > lastY) {
 			height = y - lastY;
-		} else{
+			originY = lastY;
+		} else {
 			height = lastY - y;
+			originY = y;
 		}
-		
+
 		g.setColor(Color.PINK);
-		g.drawOval(lastX, lastY, width, height);
+		g.drawOval(originX, originY, width, height);
+	}
+
+	public void mouseClicked(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 }
