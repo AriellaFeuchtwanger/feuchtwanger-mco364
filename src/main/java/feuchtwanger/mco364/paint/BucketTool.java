@@ -2,6 +2,7 @@ package feuchtwanger.mco364.paint;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class BucketTool implements Tool{
 
@@ -28,7 +29,9 @@ public class BucketTool implements Tool{
 
 	public void mouseClicked(Graphics g, int x, int y) {
 		g.setColor(Color.PINK);
-		g.getClipBounds();
+		Graphics2D g2D = (Graphics2D) g.create();
+		
+		
 	}
 
 }
