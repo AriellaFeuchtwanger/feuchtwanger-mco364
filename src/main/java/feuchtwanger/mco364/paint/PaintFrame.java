@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -71,11 +72,34 @@ public class PaintFrame extends JFrame {
 			}
 			
 		});
+		
+		JButton undo = new JButton("Undo");
+		undo.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				canvas.undo();
+			}
+			
+		});
+		
+		JButton redo = new JButton("Redo");
+		redo.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				canvas.redo();
+			}
+			
+		});
 		toolPanel.add(pencil);
 		toolPanel.add(line);
 		toolPanel.add(box);
 		toolPanel.add(oval);
 		toolPanel.add(bucket);
+		toolPanel.add(undo);
+		toolPanel.add(redo);
+		
+		JColorChooser colors = new JColorChooser();
+		
 
 		add(toolPanel, BorderLayout.NORTH);
 		setVisible(true);
