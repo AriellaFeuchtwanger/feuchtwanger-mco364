@@ -103,6 +103,7 @@ public class PaintFrame extends JFrame {
 		toolPanel.add(redo);
 		
 		colors = new JColorChooser(Color.MAGENTA);
+		colors.setPreviewPanel(new JPanel());
 		colors.getSelectionModel().addChangeListener(new ChangeListener(){
 
 			public void stateChanged(ChangeEvent arg0) {
