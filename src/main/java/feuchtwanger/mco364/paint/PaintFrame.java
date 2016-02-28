@@ -1,6 +1,7 @@
 package feuchtwanger.mco364.paint;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +11,14 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class PaintFrame extends JFrame {
 
 	private JButton pencil, oval, box, line, bucket;
 	private Canvas canvas;
+	private JColorChooser colors;
 
 	public PaintFrame() {
 		setTitle("PaintFrame");
@@ -68,7 +72,7 @@ public class PaintFrame extends JFrame {
 		bucket.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
-				canvas.setTool(new BucketTool());
+				canvas.setTool(new BucketTool(canvas));
 			}
 			
 		});
@@ -98,10 +102,19 @@ public class PaintFrame extends JFrame {
 		toolPanel.add(undo);
 		toolPanel.add(redo);
 		
-		JColorChooser colors = new JColorChooser();
-		
+		colors = new JColorChooser(Color.MAGENTA);
+		colors.getSelectionModel().addChangeListener(new ChangeListener(){
+
+			public void stateChanged(ChangeEvent arg0) {
+				Color newColor = colors.getColor();
+				canvas.setCurrColor(newColor);
+				setForeground(newColor);
+			}
+			
+		});
 
 		add(toolPanel, BorderLayout.NORTH);
+		add(colors, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 

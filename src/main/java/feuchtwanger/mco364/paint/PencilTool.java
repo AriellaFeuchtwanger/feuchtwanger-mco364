@@ -8,33 +8,27 @@ public class PencilTool implements Tool {
 	private int lastX;
 	private int lastY;
 
-	public void mousePressed(Graphics g, int x, int y) {
+	public void mousePressed(Graphics g, int x, int y, Color color) {
 		lastX = x;
 		lastY = y;
-		g.setColor(Color.PINK);
+		g.setColor(color);
 		g.fillOval(x, y, 1, 1);
 	}
 
-	public void mouseReleased(Graphics g, int x, int y) {
+	public void mouseReleased(Graphics g, int x, int y, Color color) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void mouseDragged(Graphics g, int x, int y) {
-		g.setColor(Color.PINK);
+	public void mouseDragged(Graphics g, int x, int y, Color color) {
+		g.setColor(color);
 		g.drawLine(lastX, lastY, x, y);
 		lastX = x;
 		lastY = y;
 	}
 
-	public void drawPreview(Graphics g) {
+	public void drawPreview(Graphics g, Color color) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void mouseClicked(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

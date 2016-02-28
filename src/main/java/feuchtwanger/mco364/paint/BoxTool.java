@@ -10,14 +10,14 @@ public class BoxTool implements Tool {
 	int x;
 	int y;
 
-	public void mousePressed(Graphics g, int x, int y) {
+	public void mousePressed(Graphics g, int x, int y, Color color) {
 		lastX = x;
 		lastY = y;
 		this.x = x;
 		this.y = y;
 	}
 
-	public void mouseReleased(Graphics g, int x, int y) {
+	public void mouseReleased(Graphics g, int x, int y, Color color) {
 		int width;
 		int height;
 		int originX;
@@ -39,16 +39,16 @@ public class BoxTool implements Tool {
 			originY = y;
 		}
 
-		g.setColor(Color.PINK);
+		g.setColor(color);
 		g.drawRect(originX, originY, width, height);
 	}
 
-	public void mouseDragged(Graphics g, int x, int y) {
+	public void mouseDragged(Graphics g, int x, int y, Color color) {
 		this.x = x;
 		this.y = y;
 	}
 
-	public void drawPreview(Graphics g) {
+	public void drawPreview(Graphics g, Color color) {
 		int width;
 		int height;
 		int originX;
@@ -70,12 +70,7 @@ public class BoxTool implements Tool {
 			originY = y;
 		}
 
-		g.setColor(Color.PINK);
+		g.setColor(color);
 		g.drawRect(originX, originY, width, height);
-	}
-
-	public void mouseClicked(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-		
 	}
 }
