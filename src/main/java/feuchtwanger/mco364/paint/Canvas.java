@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.swing.JPanel;
 
+@Singleton
 public class Canvas extends JPanel {
 
 	private BufferedImage buffer;
@@ -21,27 +24,26 @@ public class Canvas extends JPanel {
 	private Stack<BufferedImage> undoStack;
 	private Stack<BufferedImage> redoStack;
 	private Color currColor;
+	private static int HEIGHT = 600;
+	private static int WIDTH = 800;
+	private PaintProperties properties;
 
-	public Color getCurrColor() {
-		return currColor;
-	}
-
-	public void setCurrColor(Color currColor) {
-		this.currColor = currColor;
-	}
-
-	public Canvas() {
-		buffer = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+	@Inject
+	public Canvas(PaintProperties paintProperties) {
+		buffer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
 		setBackground(Color.WHITE);
 		undoStack = new Stack<BufferedImage>();
 		redoStack = new Stack<BufferedImage>();
-		undoStack.push(buffer);
-		redoStack.push(buffer);
+		undoStack.push(deepCopy(buffer));
 
+		this.properties = paintProperties;
+		this.properties.setColor(Color.PINK);
+		this.properties.setImage(buffer);
+		setTool(new PencilTool(this.properties));
 		this.addMouseListener(new MouseListener() {
 
 			public void mouseClicked(MouseEvent event) {
-				
+
 			}
 
 			public void mouseEntered(MouseEvent event) {
@@ -55,14 +57,14 @@ public class Canvas extends JPanel {
 			public void mousePressed(MouseEvent event) {
 				buffer = deepCopy((BufferedImage) undoStack.peek());
 				tool.mousePressed(buffer.getGraphics(), event.getX(),
-						event.getY(), currColor);
+						event.getY(), properties.getColor());
 				repaint();
 			}
 
 			public void mouseReleased(MouseEvent event) {
 				tool.mouseReleased(buffer.getGraphics(), event.getX(),
-						event.getY(), currColor);
-				undoStack.push(buffer);
+						event.getY(), properties.getColor());
+				undoStack.push(deepCopy(buffer));
 				repaint();
 			}
 
@@ -71,8 +73,9 @@ public class Canvas extends JPanel {
 		addMouseMotionListener(new MouseMotionListener() {
 
 			public void mouseDragged(MouseEvent event) {
+				buffer = (BufferedImage) undoStack.peek();
 				tool.mouseDragged(buffer.getGraphics(), event.getX(),
-						event.getY(), currColor);
+						event.getY(), properties.getColor());
 				repaint();
 			}
 
@@ -87,8 +90,8 @@ public class Canvas extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(buffer, 0, 0, null);
-		tool.drawPreview(g, currColor);
+		g.drawImage((BufferedImage) undoStack.peek(), 0, 0, null);
+		tool.drawPreview(g, properties.getColor());
 	}
 
 	public void setTool(Tool tool) {
@@ -97,34 +100,44 @@ public class Canvas extends JPanel {
 
 	public void undo() {
 		if (undoStack.size() > 1) {
-			redoStack.push(buffer);
+			redoStack.push(deepCopy(buffer));
 			buffer = (BufferedImage) undoStack.pop();
+			repaint();
 		}
-		repaint();
 	}
 
 	public void redo() {
 		if (redoStack.size() > 0) {
-			undoStack.push(buffer);
 			buffer = (BufferedImage) redoStack.pop();
+			undoStack.push(deepCopy(buffer));
+			repaint();
 		}
-		repaint();
 	}
 
 	public BufferedImage getBufferedImage() {
 		return buffer;
 	}
 
-	public void setBufferedImage(BufferedImage image){
+	public void setBufferedImage(BufferedImage image) {
 		buffer = deepCopy(image);
 		undoStack.push(buffer);
 		repaint();
 	}
-	
+
 	private BufferedImage deepCopy(BufferedImage bi) {
 		ColorModel cm = bi.getColorModel();
 		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
 		WritableRaster raster = bi.copyData(null);
 		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
 	}
+	
+	public Color getCurrColor() {
+		return currColor;
+	}
+
+	public void setCurrColor(Color currColor) {
+		//this.currColor = currColor;
+		properties.setColor(currColor);
+	}
+
 }

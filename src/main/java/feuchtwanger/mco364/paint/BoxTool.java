@@ -3,7 +3,12 @@ package feuchtwanger.mco364.paint;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class BoxTool implements Tool {
+public class BoxTool extends Tool {
+
+	public BoxTool(PaintProperties properties) {
+		super(properties);
+		// TODO Auto-generated constructor stub
+	}
 
 	private int lastX;
 	private int lastY;

@@ -3,7 +3,12 @@ package feuchtwanger.mco364.paint;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class LineTool implements Tool {
+public class LineTool extends Tool {
+
+	public LineTool(PaintProperties properties) {
+		super(properties);
+		// TODO Auto-generated constructor stub
+	}
 
 	private int x1, y1;
 	private int x2, y2;

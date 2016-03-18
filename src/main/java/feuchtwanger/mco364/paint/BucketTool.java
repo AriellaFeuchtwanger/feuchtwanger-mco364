@@ -7,14 +7,15 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BucketTool implements Tool {
+public class BucketTool extends Tool {
 
 	private BufferedImage buffer;
 	private Canvas canvas;
-	
-	public BucketTool(Canvas canvas) {
+
+	public BucketTool(Canvas canvas, PaintProperties properties) {
+		super(properties);
 		this.canvas = canvas;
-		buffer = canvas.getBufferedImage();
+		buffer = this.canvas.getBufferedImage();
 	}
 
 	public void mousePressed(Graphics g, int x, int y, Color color) {
@@ -32,19 +33,26 @@ public class BucketTool implements Tool {
 	}
 
 	private void fill(Point p, int src, int target) {
+		if (src == target) {
+			return;
+		}
 		Queue<Point> points = new LinkedList<Point>();
 		points.add(p);
-		
+
 		while (!points.isEmpty()) {
 			p = points.remove();
 			int currX = p.getX();
 			int currY = p.getY();
 
+			if (currX < 0 || currY < 0 || currX > buffer.getWidth()
+					|| currY > buffer.getHeight()) {
+				continue;
+			}
 			int left = currX;
 			int right = currX;
 			int leftColor = buffer.getRGB(left, currY);
 			int rightColor = buffer.getRGB(right, currY);
-			
+
 			do {
 				left--;
 				if (left > 0)
@@ -83,6 +91,6 @@ public class BucketTool implements Tool {
 
 	public void drawPreview(Graphics g, Color color) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
