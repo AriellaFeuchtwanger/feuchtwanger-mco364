@@ -1,5 +1,6 @@
 package feuchtwanger.mco364.paint;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -28,6 +29,7 @@ public class PencilTool extends Tool {
 	public void mouseDragged(Graphics2D g, int x, int y, Color color) {
 		g.setColor(color);
 		g.drawLine(lastX, lastY, x, y);
+		g.setStroke(new BasicStroke(properties.getWeight()));
 		lastX = x;
 		lastY = y;
 	}

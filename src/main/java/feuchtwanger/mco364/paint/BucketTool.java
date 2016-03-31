@@ -2,7 +2,7 @@ package feuchtwanger.mco364.paint;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Graphics2D2D;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.Queue;
