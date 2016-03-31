@@ -19,6 +19,7 @@ public class PaintProperties {
 		this.width = 800;
 		this.height = 600;
 		this.color = Color.BLACK;
+		this.weight = 200;
 		buffer = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
 	}
 	
@@ -27,6 +28,7 @@ public class PaintProperties {
 		this.width = WIDTH;
 		this.height = HEIGHT;
 		this.color = color;
+		this.weight = 200;
 		
 	}
 
