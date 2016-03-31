@@ -1,7 +1,7 @@
 package feuchtwanger.mco364.paint;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class OvalTool extends Tool {
 	public OvalTool(PaintProperties properties) {
@@ -14,14 +14,14 @@ public class OvalTool extends Tool {
 	int x;
 	int y;
 
-	public void mousePressed(Graphics g, int x, int y, Color color) {
+	public void mousePressed(Graphics2D g, int x, int y, Color color) {
 		lastX = x;
 		lastY = y;
 		this.x = x;
 		this.y = y;
 	}
 
-	public void mouseReleased(Graphics g, int x, int y, Color color) {
+	public void mouseReleased(Graphics2D g, int x, int y, Color color) {
 		int width;
 		int height;
 		int originX;
@@ -47,12 +47,12 @@ public class OvalTool extends Tool {
 		g.drawOval(originX, originY, width, height);
 	}
 
-	public void mouseDragged(Graphics g, int x, int y, Color color) {
+	public void mouseDragged(Graphics2D g, int x, int y, Color color) {
 		this.x = x;
 		this.y = y;
 	}
 
-	public void drawPreview(Graphics g, Color color) {
+	public void drawPreview(Graphics2D g, Color color) {
 		int width;
 		int height;
 		int originX;

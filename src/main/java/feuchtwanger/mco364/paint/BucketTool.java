@@ -1,7 +1,7 @@
 package feuchtwanger.mco364.paint;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -18,17 +18,17 @@ public class BucketTool extends Tool {
 		buffer = this.canvas.getBufferedImage();
 	}
 
-	public void mousePressed(Graphics g, int x, int y, Color color) {
+	public void mousePressed(Graphics2D g, int x, int y, Color color) {
 		g.setColor(Color.PINK);
 		// fill(new Point(x, y), buffer.getRGB(x, y), Color.PINK.getRGB());
 		fill(new Point(x, y), buffer.getRGB(x, y), color.getRGB());
 	}
 
-	public void mouseReleased(Graphics g, int x, int y, Color color) {
+	public void mouseReleased(Graphics2D g, int x, int y, Color color) {
 
 	}
 
-	public void mouseDragged(Graphics g, int x, int y, Color color) {
+	public void mouseDragged(Graphics2D g, int x, int y, Color color) {
 
 	}
 
@@ -89,7 +89,7 @@ public class BucketTool extends Tool {
 		canvas.setBufferedImage(buffer);
 	}
 
-	public void drawPreview(Graphics g, Color color) {
+	public void drawPreview(Graphics2D g, Color color) {
 		// TODO Auto-generated method stub
 
 	}

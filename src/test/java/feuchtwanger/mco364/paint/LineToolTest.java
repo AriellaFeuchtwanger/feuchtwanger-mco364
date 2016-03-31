@@ -1,7 +1,7 @@
 package feuchtwanger.mco364.paint;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import org.junit.Test;
@@ -13,7 +13,7 @@ public class LineToolTest {
 		PaintProperties properties = new PaintProperties();
 		LineTool tool = new LineTool(properties);
 		
-		Graphics g = Mockito.mock(Graphics.class);
+		Graphics2D g = Mockito.mock(Graphics2D.class);
 		
 		tool.mousePressed(g, 5, 5, Color.PINK);
 		tool.mouseReleased(g, 10, 10, Color.PINK);
@@ -26,7 +26,7 @@ public class LineToolTest {
 		PaintProperties properties = new PaintProperties();
 		LineTool tool = new LineTool(properties);
 		
-		Graphics g = Mockito.mock(Graphics.class);
+		Graphics2D g = Mockito.mock(Graphics2D.class);
 		
 		tool.mousePressed(g, 5, 5, Color.PINK);
 		tool.mouseDragged(g, 10, 10, Color.PINK);
@@ -39,7 +39,7 @@ public class LineToolTest {
 		PaintProperties properties = new PaintProperties();
 		PencilTool tool = new PencilTool(properties);
 		
-		Graphics g = Mockito.mock(Graphics.class);
+		Graphics2D g = Mockito.mock(Graphics2D.class);
 		
 		tool.mousePressed(g, 7, 7, Color.PINK);
 		Mockito.verify(g).drawOval(7, 7, 1, 1);

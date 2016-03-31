@@ -1,6 +1,8 @@
 package feuchtwanger.mco364.paint;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 
 import javax.inject.Singleton;
@@ -8,7 +10,7 @@ import javax.inject.Singleton;
 @Singleton
 public class PaintProperties {
 	private Color color;
-	private int weight;
+	private Stroke stroke;
 	private boolean fill;
 	private int width;
 	private int height;
@@ -19,6 +21,7 @@ public class PaintProperties {
 		this.width = 800;
 		this.height = 600;
 		this.color = Color.BLACK;
+		this.stroke = new BasicStroke(30);
 		buffer = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
 	}
 	
@@ -27,6 +30,7 @@ public class PaintProperties {
 		this.width = WIDTH;
 		this.height = HEIGHT;
 		this.color = color;
+		this.stroke = new BasicStroke(30);
 		
 	}
 
@@ -44,11 +48,11 @@ public class PaintProperties {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	public int getWeight() {
-		return weight;
+	public Stroke getStroke() {
+		return stroke;
 	}
 	public void setWeight(int weight) {
-		this.weight = weight;
+		this.stroke = new BasicStroke(weight);
 	}
 	public boolean isFill() {
 		return fill;

@@ -2,6 +2,7 @@ package feuchtwanger.mco364.paint;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -56,13 +57,13 @@ public class Canvas extends JPanel {
 
 			public void mousePressed(MouseEvent event) {
 				buffer = deepCopy((BufferedImage) undoStack.peek());
-				tool.mousePressed(buffer.getGraphics(), event.getX(),
+				tool.mousePressed(buffer.createGraphics(), event.getX(),
 						event.getY(), properties.getColor());
 				repaint();
 			}
 
 			public void mouseReleased(MouseEvent event) {
-				tool.mouseReleased(buffer.getGraphics(), event.getX(),
+				tool.mouseReleased(buffer.createGraphics(), event.getX(),
 						event.getY(), properties.getColor());
 				undoStack.push(deepCopy(buffer));
 				repaint();
@@ -74,7 +75,7 @@ public class Canvas extends JPanel {
 
 			public void mouseDragged(MouseEvent event) {
 				buffer = (BufferedImage) undoStack.peek();
-				tool.mouseDragged(buffer.getGraphics(), event.getX(),
+				tool.mouseDragged(buffer.createGraphics(), event.getX(),
 						event.getY(), properties.getColor());
 				repaint();
 			}
@@ -90,8 +91,9 @@ public class Canvas extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage((BufferedImage) undoStack.peek(), 0, 0, null);
-		tool.drawPreview(g, properties.getColor());
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage((BufferedImage) undoStack.peek(), 0, 0, null);
+		tool.drawPreview(g2, properties.getColor());
 	}
 
 	public void setTool(Tool tool) {
