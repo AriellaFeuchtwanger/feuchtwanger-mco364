@@ -9,8 +9,8 @@ public class LineTool extends Tool {
 	private static final Logger LOG = Logger
 			.getLogger(LineTool.class.getName());
 
-	public LineTool(PaintProperties properties) {
-		super(properties);
+	public LineTool(CanvasRepaintManager manager, PaintProperties properties) {
+		super(manager, properties);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -37,8 +37,6 @@ public class LineTool extends Tool {
 	public void drawPreview(Graphics2D g, Color color) {
 		g.setColor(color);
 		g.drawLine(x1, y1, x2, y2);
-
-		
 	}
 
 }

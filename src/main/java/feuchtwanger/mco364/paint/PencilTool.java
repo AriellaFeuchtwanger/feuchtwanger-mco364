@@ -6,19 +6,22 @@ import java.awt.Graphics2D;
 
 public class PencilTool extends Tool {
 
-	public PencilTool(PaintProperties properties) {
-		super(properties);
+	public PencilTool(CanvasRepaintManager manager, PaintProperties properties) {
+		super(manager, properties);
+		this.manager = manager;
 		// TODO Auto-generated constructor stub
 	}
 
 	private int lastX;
 	private int lastY;
+	private CanvasRepaintManager manager;
 
 	public void mousePressed(Graphics2D g, int x, int y, Color color) {
 		lastX = x;
 		lastY = y;
 		g.setColor(color);
 		g.setStroke(properties.getStroke());
+		manager.repaint(x, y, x+1, y+1);
 	}
 
 	public void mouseReleased(Graphics2D g, int x, int y, Color color) {
@@ -30,6 +33,7 @@ public class PencilTool extends Tool {
 		g.setColor(color);
 		g.drawLine(lastX, lastY, x, y);
 		g.setStroke(properties.getStroke());
+		manager.repaint(x, y, lastX, lastY);
 		lastX = x;
 		lastY = y;
 	}
