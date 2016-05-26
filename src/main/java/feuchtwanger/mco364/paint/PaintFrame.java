@@ -6,6 +6,10 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -60,6 +64,12 @@ public class PaintFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		
+		Logger logger = Logger.getLogger("feuchtwanger.mco364.paint");
+		logger.setLevel(Level.FINE);
+		Handler handler = new ConsoleHandler();
+		handler.setLevel(Level.FINE);
+		logger.addHandler(handler);
 		
 		Injector injector = Guice.createInjector(new PaintModule());
 		PaintFrame frame = injector.getInstance(PaintFrame.class);

@@ -2,8 +2,12 @@ package feuchtwanger.mco364.paint;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.logging.Logger;
 
 public class LineTool extends Tool {
+
+	private static final Logger LOG = Logger
+			.getLogger(LineTool.class.getName());
 
 	public LineTool(PaintProperties properties) {
 		super(properties);
@@ -34,6 +38,7 @@ public class LineTool extends Tool {
 		g.setColor(color);
 		g.drawLine(x1, y1, x2, y2);
 
+		
 	}
 
 }
