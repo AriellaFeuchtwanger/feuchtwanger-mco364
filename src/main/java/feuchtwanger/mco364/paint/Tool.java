@@ -7,7 +7,7 @@ public abstract class Tool {
 
 	protected PaintProperties properties;
 	
-	public Tool(PaintProperties properties){
+	public Tool(CanvasRepaintManager manager, PaintProperties properties){
 		this.properties = properties;
 	}
 	
